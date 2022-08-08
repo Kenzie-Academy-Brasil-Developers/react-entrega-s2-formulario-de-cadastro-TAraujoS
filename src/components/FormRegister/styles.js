@@ -45,20 +45,6 @@ export const Form = styled.form`
     line-height: 0px;
   }
 
-  input {
-    height: 40px;
-    width: 100%;
-    padding: 5px;
-
-    background-color: var(--color-grayinput);
-    border: 1px solid var(--color-grayinput);
-    border-radius: 4px;
-
-    &:hover {
-      border: 1px solid var(--color-whitetext);
-    }
-  }
-
   select {
     height: 40px;
     width: 100%;

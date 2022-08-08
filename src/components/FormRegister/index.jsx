@@ -9,11 +9,12 @@ import logo from "../../assets/Logo.svg";
 import { Header } from "../Dashboard/styles";
 import { Form } from "./styles";
 import { toast } from "react-toastify";
+import Input from "../Input";
 
 function FormRegister() {
   const schema = yup.object().shape({
-    name: yup.string().required("Campo obrigatório"),
-    email: yup.string().required("Campo obrigatório").email("Email inválido"),
+    name: yup.string().required("Nome obrigatório"),
+    email: yup.string().required("Email obrigatório").email("Email inválido"),
     password: yup
       .string()
       .required("Senha obrigatório")
@@ -24,7 +25,7 @@ function FormRegister() {
     confirmPassword: yup
       .string()
       .oneOf([yup.ref("password"), null], "As senhas devem ser iguais"),
-    bio: yup.string().required("Campo obrigatório"),
+    bio: yup.string().required("Bio obrigatório"),
     contact: yup.string().required("Contato obrigatório"),
     course_module: yup.string().required("Módulo obrigatório"),
   });
@@ -73,67 +74,53 @@ function FormRegister() {
       <Form onSubmit={handleSubmit(registerUser, onError)}>
         <h2>Crie sua conta</h2>
         <h4>Rapido e grátis, vamos nessa</h4>
-
-        <label htmlFor="name">Nome</label>
-        <div>
-          <input
-            type="text"
-            id="name"
-            placeholder="Digite aqui o seu nome"
-            {...register("name")}
-          />
-          <span>{errors.name?.message}</span>
-        </div>
-        <label htmlFor="email">Email</label>
-        <div>
-          <input
-            type="text"
-            id="email"
-            placeholder="Digite aqui o seu email"
-            {...register("email")}
-          />
-          <span>{errors.email?.message}</span>
-        </div>
-        <label htmlFor="password">Senha</label>
-        <div>
-          <input
-            type="password"
-            id="password"
-            placeholder="Digite aqui o sua senha"
-            {...register("password")}
-          />
-          <span>{errors.password?.message}</span>
-        </div>
-        <label htmlFor="confirm-password">Confirmar Senha</label>
-        <div>
-          <input
-            type="password"
-            id="confirm-password"
-            placeholder="Digite novamente sua senha"
-            {...register("confirmPassword")}
-          />
-          <span>{errors.confirmPassword?.message}</span>
-        </div>
-        <label htmlFor="bio">Bio</label>
-        <div>
-          <input
-            type="text"
-            id="bio"
-            placeholder="Fale sobre você"
-            {...register("bio")}
-          />
-          <span>{errors.bio?.message}</span>
-        </div>
-        <label htmlFor="contact">Contato</label>
-        <div>
-          <input
-            type="text"
-            id="contact"
-            placeholder="Opção de contato"
-            {...register("contact")}
-          />
-          <span>{errors.contact?.message}</span>
-        </div>
+        <Input
+          type="text"
+          id="name"
+          label="Nome"
+          placeholder="Digite aqui o seu nome"
+          {...register("name")}
+          error={errors?.name}
+        />
+        <Input
+          id="email"
+          label="Email"
+          placeholder="Digite aqui o seu email"
+          {...register("email")}
+          error={errors?.email}
+        />
+        <Input
+          type="password"
+          id="password"
+          label="Senha"
+          placeholder="Digite aqui o sua senha"
+          {...register("password")}
+          error={errors?.password}
+        />
+        <Input
+          type="password"
+          label="Confirmar Senhar"
+          id="confirm-password"
+          placeholder="Digite novamente sua senha"
+          {...register("confirmPassword")}
+          error={errors?.confirmPassword}
+        />
+        <Input
+          type="text"
+          label="Bio"
+          id="bio"
+          placeholder="Fale sobre você"
+          {...register("bio")}
+          error={errors?.bio}
+        />
+        <Input
+          type="text"
+          label="Contato"
+          id="contact"
+          placeholder="Opção de contato"
+          {...register("contact")}
+          error={errors?.contact}
+        />
         <label htmlFor="module">Selecionar Módulo </label>
         <select name="module" id="module" {...register("course_module")}>
           <option value="Primeiro módulo (Introdução ao Frontend)">

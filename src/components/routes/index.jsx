@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import Dashboard from "../Dashboard/dash";
 import Login from "../Login/login";
 import FormRegister from "../FormRegister";
@@ -12,6 +12,7 @@ function RoutesMain() {
         <Route path="/" element={<Login />} />
         <Route path="/register" element={<FormRegister />} />
         <Route path="/dashboard/:id" element={<Dashboard />} />
+        <Route path="*" element={<Navigate to="/register" />} />
       </Routes>
     </Main>
   );
