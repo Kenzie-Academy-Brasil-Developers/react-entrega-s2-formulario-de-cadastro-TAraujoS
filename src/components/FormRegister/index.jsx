@@ -1,15 +1,15 @@
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import api from "../../services/api";
+import Input from "../Input";
+import logo from "../../assets/Logo.svg";
 import "./styles";
 import { Section } from "../Login/styles";
-import logo from "../../assets/Logo.svg";
-import { Header } from "../Dashboard/styles";
-import { Form } from "./styles";
+import { Form, HeaderForm } from "./styles";
 import { toast } from "react-toastify";
-import Input from "../Input";
+import { LinkStyled as Link } from "./styles";
 
 function FormRegister() {
   const schema = yup.object().shape({
@@ -64,12 +64,10 @@ function FormRegister() {
 
   return (
     <Section>
-      <Header className="top">
+      <HeaderForm>
         <img src={logo} alt="Logo KenzieHub" />
-        <button>
-          <Link to="/">Voltar</Link>
-        </button>
-      </Header>
+        <Link to="/">Voltar</Link>
+      </HeaderForm>
 
       <Form onSubmit={handleSubmit(registerUser, onError)}>
         <h2>Crie sua conta</h2>

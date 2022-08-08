@@ -1,4 +1,48 @@
 import styled from "styled-components";
+import { Link } from "react-router-dom";
+
+export const LinkStyled = styled(Link)`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  height: 30px;
+  width: 50px;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 0.75rem;
+  line-height: 1.75rem;
+
+  color: var(--color-white);
+  background-color: var(--color-grayform);
+  border-radius: 4px;
+  text-decoration: none;
+  cursor: pointer;
+
+  &:hover {
+    border: 1px solid var(--color-white);
+  }
+
+  &:active {
+    background-color: var(--color-white);
+    color: var(--color-grayform);
+  }
+`;
+
+export const HeaderForm = styled.header`
+  height: 100px;
+  gap: 12rem;
+  width: 100%;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  img {
+    height: 100%;
+    width: 160px;
+  }
+`;
 
 export const Form = styled.form`
   height: 90%;
@@ -19,8 +63,8 @@ export const Form = styled.form`
   > h2 {
     font-style: normal;
     font-weight: 700;
-    font-size: 18px;
-    line-height: 28px;
+    font-size: 1.1rem;
+    line-height: 1.8rem;
     color: var(--color-whitetext);
     margin: 0 auto;
   }
@@ -28,8 +72,8 @@ export const Form = styled.form`
   h4 {
     font-style: normal;
     font-weight: 400;
-    font-size: 12px;
-    line-height: 22px;
+    font-size: 0.75rem;
+    line-height: 1.4rem;
     color: var(--color-graydark);
     margin: 0 auto;
   }
@@ -41,7 +85,7 @@ export const Form = styled.form`
 
     font-style: normal;
     font-weight: 400;
-    font-size: 12px;
+    font-size: 0.75rem;
     line-height: 0px;
   }
 
@@ -59,8 +103,8 @@ export const Form = styled.form`
   option {
     font-style: normal;
     font-weight: 400;
-    font-size: 16px;
-    line-height: 26px;
+    font-size: 1rem;
+    line-height: 1.6rem;
 
     color: var(--color-graydark);
   }

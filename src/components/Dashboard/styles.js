@@ -7,7 +7,7 @@ export const Header = styled.header`
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 20rem;
+  gap: 30%;
 
   img {
     width: 140px;
@@ -16,6 +16,12 @@ export const Header = styled.header`
   > button {
     height: 30px;
     width: 50px;
+
+    font-style: normal;
+    font-weight: 600;
+    font-size: 0.75rem;
+    line-height: 1.75rem;
+
     color: var(--color-white);
     background-color: var(--color-grayform);
     border-radius: 4px;
@@ -40,7 +46,7 @@ export const Container = styled.section`
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 20rem;
+  gap: 20%;
 
   border-top: 1px solid var(--color-grayinput);
   border-bottom: 1px solid var(--color-grayinput);
@@ -48,16 +54,22 @@ export const Container = styled.section`
   h4 {
     font-style: normal;
     font-weight: 700;
-    font-size: 18px;
-    line-height: 28px;
+    font-size: 1.1rem;
+    line-height: 1.75rem;
     color: var(--color-white);
   }
 
   p {
     font-style: normal;
     font-weight: 400;
-    font-size: 12px;
-    line-height: 22px;
+    font-size: 0.75rem;
+    line-height: 1.4rem;
     color: var(--color-graydark);
+  }
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    padding-left: 10%;
+    align-items: flex-start;
   }
 `;

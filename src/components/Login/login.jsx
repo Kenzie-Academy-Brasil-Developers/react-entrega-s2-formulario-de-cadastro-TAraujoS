@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -8,6 +8,8 @@ import { Form, Section } from "./styles";
 import logo from "../../assets/Logo.svg";
 import { toast } from "react-toastify";
 import React from "react";
+import { LinkStyled as Link } from "./styles";
+import Input from "../Input";
 
 function Login() {
   const schema = yup.object().shape({
@@ -49,29 +51,27 @@ function Login() {
       <img src={logo} alt="Logo KenzieHub" />
       <Form action="" onSubmit={handleSubmit(submitLogin, onError)}>
         <h2>Login</h2>
-        <label htmlFor="email">
-          Email <span>{errors.email?.message}</span>
-        </label>
-        <input
-          type="email"
-          placeholder="Digite seu email aqui"
+        <Input
+          id="email"
+          label="Email"
+          placeholder="Digite aqui o seu email"
           {...register("email")}
+          error={errors?.email}
         />
-        <label htmlFor="password">
-          Senha <span>{errors.password?.message}</span>
-        </label>
-        <input
+        <Input
           type="password"
-          placeholder="Digite sua senha aqui"
+          id="password"
+          label="Senha"
+          placeholder="Digite aqui o sua senha"
           {...register("password")}
+          error={errors?.password}
         />
         <button className="submit" type="submit">
           Entrar
         </button>
         <p>Ainda não possui conta?</p>
-        <button className="register" type="button">
-          <Link to="/register">Cadastre-se</Link>
-        </button>
+
+        <Link to="/register">Cadastre-se</Link>
       </Form>
     </Section>
   );

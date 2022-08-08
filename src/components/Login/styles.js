@@ -1,4 +1,24 @@
 import styled from "styled-components";
+import { Link } from "react-router-dom";
+
+export const LinkStyled = styled(Link)`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  height: 40px;
+  width: 100%;
+
+  border-radius: 4px;
+  color: var(--color-white);
+  cursor: pointer;
+
+  &:hover {
+    border: 1px solid var(--color-white);
+  }
+  text-decoration: none;
+  background-color: var(--color-graydark);
+`;
 
 export const Section = styled.section`
   min-height: 90vh;
@@ -44,7 +64,7 @@ export const Form = styled.form`
 
     font-style: normal;
     font-weight: 400;
-    font-size: 12px;
+    font-size: 0.75rem;
     line-height: 0px;
   }
 
@@ -56,17 +76,13 @@ export const Form = styled.form`
     background-color: var(--color-grayinput);
     border: 1px solid var(--color-grayinput);
     border-radius: 4px;
-
-    &:hover {
-      border: 1px solid var(--color-whitetext);
-    }
   }
 
   p {
     font-style: normal;
     font-weight: 600;
-    font-size: 12px;
-    line-height: 18px;
+    font-size: 0.75rem;
+    line-height: 1.1rem;
     color: var(--color-graydark);
   }
 
@@ -76,20 +92,16 @@ export const Form = styled.form`
 
     border-radius: 4px;
     color: var(--color-white);
-
+    background-color: var(--color-pink);
     cursor: pointer;
+
+    font-style: normal;
+    font-weight: 500;
+    font-size: 1rem;
+    line-height: 1.6rem;
 
     &:hover {
       border: 1px solid var(--color-white);
     }
-  }
-
-  .submit {
-    background-color: var(--color-pink);
-  }
-
-  .register {
-    text-decoration: none;
-    background-color: var(--color-graydark);
   }
 `;
