@@ -1,6 +1,6 @@
 import { Routes, Route, Navigate } from "react-router-dom";
-import Dashboard from "../Dashboard/dash";
-import Login from "../Login/login";
+import Dashboard from "../Dashboard/index";
+import Login from "../Login/index";
 import FormRegister from "../FormRegister";
 import "./styles";
 import { Main } from "./styles";
