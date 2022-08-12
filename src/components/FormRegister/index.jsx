@@ -1,7 +1,5 @@
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useNavigate } from "react-router-dom";
-import api from "../../services/api";
 import Input from "../Input";
 import logo from "../../assets/Logo.svg";
 import "./styles";
@@ -10,37 +8,16 @@ import { Form, HeaderForm } from "./styles";
 import { toast } from "react-toastify";
 import { LinkStyled as Link } from "./styles";
 import { registerSchema } from "../../validators";
+import { useAuth } from "../../contexts/AuthContext";
 
 function FormRegister() {
+  const { registerUser } = useAuth();
+
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm({ resolver: yupResolver(registerSchema) });
-
-  const navigate = useNavigate();
-
-  const registerUser = (data) => {
-    const cadastro = {
-      email: data.email,
-      password: data.password,
-      name: data.name,
-      bio: data.bio,
-      contact: data.contact,
-      course_module: data.course_module,
-    };
-    api
-      .post("/users", cadastro)
-      .then((response) => {
-        console.log(response);
-        toast.success("Cadastro realizado com sucesso!");
-        navigate(`/`);
-      })
-      .catch((err) => {
-        toast.error("Ops! Algo deu errado");
-        console.log(err);
-      });
-  };
 
   const onError = () => toast.error("Preencha todos os campos!");
 

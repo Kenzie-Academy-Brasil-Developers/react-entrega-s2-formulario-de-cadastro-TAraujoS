@@ -12,6 +12,28 @@ const AuthProvider = ({ children }) => {
   const navigate = useNavigate();
   const location = useLocation();
 
+  async function registerUser(data) {
+    const cadastro = {
+      email: data.email,
+      password: data.password,
+      name: data.name,
+      bio: data.bio,
+      contact: data.contact,
+      course_module: data.course_module,
+    };
+    await api
+      .post("/users", cadastro)
+      .then((response) => {
+        console.log(response);
+        toast.success("Cadastro realizado com sucesso!");
+        navigate(`/`);
+      })
+      .catch((err) => {
+        toast.error("Ops! Algo deu errado");
+        console.log(err);
+      });
+  }
+
   async function loadUser() {
     const token = localStorage.getItem("@kenzie-hub:token");
 
@@ -64,7 +86,7 @@ const AuthProvider = ({ children }) => {
 
   return (
     <AuthContext.Provider
-      value={{ user, loading, loadUser, submitLogin, logout }}
+      value={{ user, loading, registerUser, loadUser, submitLogin, logout }}
     >
       {children}
     </AuthContext.Provider>
