@@ -1,4 +1,3 @@
-import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useNavigate } from "react-router-dom";
@@ -10,31 +9,14 @@ import { Section } from "../Login/styles";
 import { Form, HeaderForm } from "./styles";
 import { toast } from "react-toastify";
 import { LinkStyled as Link } from "./styles";
+import { registerSchema } from "../../validators";
 
 function FormRegister() {
-  const schema = yup.object().shape({
-    name: yup.string().required("Nome obrigatório"),
-    email: yup.string().required("Email obrigatório").email("Email inválido"),
-    password: yup
-      .string()
-      .required("Senha obrigatório")
-      .matches(
-        /(^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*_-])).{8,}$/,
-        "Senha deve conter 8 letras, uma maiúscula, uma minúscula, um número e um caracter especial"
-      ),
-    confirmPassword: yup
-      .string()
-      .oneOf([yup.ref("password"), null], "As senhas devem ser iguais"),
-    bio: yup.string().required("Bio obrigatório"),
-    contact: yup.string().required("Contato obrigatório"),
-    course_module: yup.string().required("Módulo obrigatório"),
-  });
-
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({ resolver: yupResolver(schema) });
+  } = useForm({ resolver: yupResolver(registerSchema) });
 
   const navigate = useNavigate();
 

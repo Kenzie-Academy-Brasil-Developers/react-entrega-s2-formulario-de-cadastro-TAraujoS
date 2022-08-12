@@ -4,6 +4,7 @@ import Login from "../Login/index";
 import FormRegister from "../FormRegister";
 import "./styles";
 import { Main } from "./styles";
+import ProtectedRoutes from "../../ProtectedRoutes";
 
 function RoutesMain() {
   return (
@@ -11,7 +12,9 @@ function RoutesMain() {
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/register" element={<FormRegister />} />
-        <Route path="/dashboard/:id" element={<Dashboard />} />
+        <Route element={<ProtectedRoutes />}>
+          <Route path="/dashboard/" element={<Dashboard />} />
+        </Route>
         <Route path="*" element={<Navigate to="/register" />} />
       </Routes>
     </Main>
