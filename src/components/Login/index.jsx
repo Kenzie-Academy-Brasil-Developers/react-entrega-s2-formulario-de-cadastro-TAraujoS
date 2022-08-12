@@ -1,8 +1,6 @@
-import { useNavigate } from "react-router-dom";
-import * as yup from "yup";
+import { Navigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import api from "../../services/api";
 import "./styles";
 import { Form, Section } from "./styles";
 import logo from "../../assets/Logo.svg";
@@ -10,43 +8,29 @@ import { toast } from "react-toastify";
 import React from "react";
 import { LinkStyled as Link } from "./styles";
 import Input from "../Input";
+import { loginSchema } from "../../validators";
+import { useAuth } from "../../contexts/AuthContext";
 
 function Login() {
-  const schema = yup.object().shape({
-    email: yup.string().required("E-mail obrigatório").email("E-mail inválido"),
-    password: yup.string().required("Senha obrigatória"),
-  });
+  const { user, loading, submitLogin } = useAuth();
 
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm({
-    resolver: yupResolver(schema),
+    resolver: yupResolver(loginSchema),
   });
-
-  const navigate = useNavigate();
-
-  const submitLogin = (data) => {
-    api
-      .post("/sessions", data)
-      .then((response) => {
-        console.log(response);
-        localStorage.setItem("@token", response.data.token);
-        localStorage.setItem("@userData", JSON.stringify(response.data.user));
-        localStorage.setItem("@userId", response.data.user.id);
-        toast.success("Login efetuado com sucesso!");
-        navigate(`/dashboard/:`);
-      })
-      .catch((err) => {
-        toast.error("Email ou senha inválidos");
-        console.log(err);
-      });
-  };
 
   const onError = () => toast.error("Preencha todos os campos!");
 
-  return (
+  if (loading) {
+    return <div>Carregando...</div>;
+  }
+
+  return user ? (
+    <Navigate to="/dashboard" replace />
+  ) : (
     <Section>
       <img src={logo} alt="Logo KenzieHub" />
       <Form action="" onSubmit={handleSubmit(submitLogin, onError)}>
