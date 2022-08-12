@@ -1,4 +1,3 @@
-import { Navigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import "./styles";
@@ -11,8 +10,8 @@ import Input from "../Input";
 import { loginSchema } from "../../validators";
 import { useAuth } from "../../contexts/AuthContext";
 
-function Login() {
-  const { user, loading, submitLogin } = useAuth();
+function LoginForm() {
+  const { submitLogin } = useAuth();
 
   const {
     register,
@@ -24,13 +23,7 @@ function Login() {
 
   const onError = () => toast.error("Preencha todos os campos!");
 
-  if (loading) {
-    return <div>Carregando...</div>;
-  }
-
-  return user ? (
-    <Navigate to="/dashboard" replace />
-  ) : (
+  return (
     <Section>
       <img src={logo} alt="Logo KenzieHub" />
       <Form action="" onSubmit={handleSubmit(submitLogin, onError)}>
@@ -60,4 +53,4 @@ function Login() {
     </Section>
   );
 }
-export default Login;
+export default LoginForm;

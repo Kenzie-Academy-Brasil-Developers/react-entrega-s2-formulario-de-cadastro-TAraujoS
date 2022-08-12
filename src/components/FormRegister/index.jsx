@@ -5,7 +5,7 @@ import api from "../../services/api";
 import Input from "../Input";
 import logo from "../../assets/Logo.svg";
 import "./styles";
-import { Section } from "../Login/styles";
+import { Section } from "../LoginForm/styles";
 import { Form, HeaderForm } from "./styles";
 import { toast } from "react-toastify";
 import { LinkStyled as Link } from "./styles";
