@@ -1,17 +1,17 @@
 import { Routes, Route, Navigate } from "react-router-dom";
-import Dashboard from "../Dashboard/index";
-import Login from "../Login/index";
-import FormRegister from "../FormRegister";
+import Register from "../pages/Register";
+import Login from "../pages/Login";
+import Dashboard from "../pages/Dashboard";
 import "./styles";
 import { Main } from "./styles";
-import ProtectedRoutes from "../../ProtectedRoutes";
+import ProtectedRoutes from "../ProtectedRoutes";
 
 function RoutesMain() {
   return (
     <Main>
       <Routes>
         <Route path="/" element={<Login />} />
-        <Route path="/register" element={<FormRegister />} />
+        <Route path="/register" element={<Register />} />
         <Route element={<ProtectedRoutes />}>
           <Route path="/dashboard/" element={<Dashboard />} />
         </Route>

@@ -3,7 +3,7 @@ import logo from "../../assets/Logo.svg";
 import { Container, Header } from "./styles";
 import { useAuth } from "../../contexts/AuthContext";
 
-function Dashboard() {
+const HeaderDashboard = () => {
   const { user, logout } = useAuth();
   //const userInfo = JSON.parse(localStorage.getItem("@userData"));
   //criar um state para guardar as info do user;
@@ -24,6 +24,6 @@ function Dashboard() {
       </Container>
     </>
   );
-}
+};
 
-export default Dashboard;
+export default HeaderDashboard;
