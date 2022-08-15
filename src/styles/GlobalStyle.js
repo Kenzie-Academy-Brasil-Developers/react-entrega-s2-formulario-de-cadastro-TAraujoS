@@ -13,12 +13,16 @@ const GlobalStyle = createGlobalStyle`
         --color-black: #000000;
         --color-white: #fff;
         --color-grayform: #212529;
-        --color-grayinput: #343B41;
         --color-whitetext:  #F8F9FA;
         --color-graydark: #868E96;
+        --color-grayinput: #343B41;
         --color-pink: #FF577F;
         --color-purple: #59323F;
+        --color-list: #121214;
         
+        --grey-0: #F8F9FA;
+        --grey-1: #868E96;
+        --grey-2: #343B41;
     }
 
     body {

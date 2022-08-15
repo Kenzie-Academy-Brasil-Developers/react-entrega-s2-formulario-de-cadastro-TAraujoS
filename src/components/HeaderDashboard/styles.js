@@ -69,7 +69,7 @@ export const Container = styled.section`
 
   @media (max-width: 768px) {
     flex-direction: column;
-    padding-left: 10%;
+    padding-left: 25%;
     align-items: flex-start;
   }
 `;
