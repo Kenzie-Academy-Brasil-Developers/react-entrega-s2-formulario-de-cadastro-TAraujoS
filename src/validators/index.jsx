@@ -22,3 +22,8 @@ export const loginSchema = yup.object().shape({
   email: yup.string().required("E-mail obrigatório").email("E-mail inválido"),
   password: yup.string().required("Senha obrigatória"),
 });
+
+export const newSchema = yup.object({
+  title: yup.string().required("Nome Obrigatório"),
+  status: yup.string().required("Status Obrigatório"),
+});

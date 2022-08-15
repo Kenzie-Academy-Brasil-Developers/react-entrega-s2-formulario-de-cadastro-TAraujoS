@@ -1,24 +1,23 @@
-import { useTechs } from "../../contexts/TechsContext";
+import { useContext } from "react";
+import { TechsContext } from "../../contexts/TechsContext";
+import { TechUl } from "./styles";
+import trash from "../../assets/trash.svg";
 
 const TechList = () => {
-  const { techs } = useTechs();
-
-  const modalTech = () => {};
+  const { techs, deleteTech } = useContext(TechsContext);
 
   return (
-    <main>
-      <div>
-        <h2>Tecnologias</h2>
-        <button onClick={() => modalTech()}>+</button>
-      </div>
-
-      <ul>
-        <li>
-          <h3>TECH</h3>
-          <p>Descrição</p>
+    <TechUl>
+      {techs?.map((tech) => (
+        <li key={tech.id} tech={tech}>
+          <h3>{tech.title}</h3>
+          <div className="btnDelete">
+            <p>{tech.status}</p>
+            <img src={trash} alt="Lixeira" onClick={() => deleteTech()} />
+          </div>
         </li>
-      </ul>
-    </main>
+      ))}
+    </TechUl>
   );
 };
 

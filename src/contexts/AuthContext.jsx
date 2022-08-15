@@ -34,7 +34,7 @@ const AuthProvider = ({ children }) => {
       });
   }
 
-  async function loadUser() {
+  async function verifyUser() {
     const token = localStorage.getItem("@kenzie-hub:token");
 
     if (token) {
@@ -52,7 +52,7 @@ const AuthProvider = ({ children }) => {
   }
 
   useEffect(() => {
-    loadUser();
+    verifyUser();
   }, []);
 
   async function submitLogin(data) {
@@ -62,7 +62,6 @@ const AuthProvider = ({ children }) => {
       const { user: userResponse, token } = response.data;
 
       api.defaults.headers.authorization = `Bearer ${token}`;
-
       setUser(userResponse);
 
       localStorage.setItem("@kenzie-hub:token", token);
@@ -86,7 +85,7 @@ const AuthProvider = ({ children }) => {
 
   return (
     <AuthContext.Provider
-      value={{ user, loading, registerUser, loadUser, submitLogin, logout }}
+      value={{ user, loading, registerUser, submitLogin, logout }}
     >
       {children}
     </AuthContext.Provider>

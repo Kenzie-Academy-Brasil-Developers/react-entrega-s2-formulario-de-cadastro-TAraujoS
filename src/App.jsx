@@ -3,13 +3,16 @@ import GlobalStyle from "./styles/GlobalStyle";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import AuthProvider from "./contexts/AuthContext";
+import TechProvider from "./contexts/TechsContext";
 
 function App() {
   return (
     <AuthProvider>
-      <GlobalStyle />
-      <RoutesMain />
-      <ToastContainer />
+      <TechProvider>
+        <GlobalStyle />
+        <RoutesMain />
+        <ToastContainer />
+      </TechProvider>
     </AuthProvider>
   );
 }
