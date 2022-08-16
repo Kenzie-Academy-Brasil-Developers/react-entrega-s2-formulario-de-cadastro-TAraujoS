@@ -4,6 +4,7 @@ export const TechUl = styled.ul`
   display: flex;
   flex-direction: column;
   width: 55%;
+  min-width: 360px;
 
   margin-bottom: 50px;
   padding: 1rem;
@@ -50,5 +51,16 @@ export const TechUl = styled.ul`
     font-weight: 400;
     font-size: 12px;
     line-height: 22px;
+  }
+`;
+
+export const SectionClear = styled.section`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 50px;
+
+  h1 {
+    color: var(--color-whitetext);
   }
 `;
