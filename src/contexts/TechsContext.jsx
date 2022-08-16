@@ -33,6 +33,7 @@ const TechProvider = ({ children }) => {
       .then((res) => {
         setTechs((oldList) => [res.data, ...oldList]);
         toast.success("Tech criada com sucesso!");
+        setModal(null);
       })
       .catch((error) => console.log(error));
   }
@@ -51,6 +52,7 @@ const TechProvider = ({ children }) => {
         const newTechList = techs.filter((tech) => tech.id !== id);
         setTechs(newTechList);
         toast.success("Tech deletada com sucesso!");
+        setModal(null);
       })
       .catch((error) => console.log(error));
   }
