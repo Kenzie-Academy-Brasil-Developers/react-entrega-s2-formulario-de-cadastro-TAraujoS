@@ -12,6 +12,14 @@ const AuthProvider = ({ children }) => {
   const navigate = useNavigate();
   const location = useLocation();
 
+  const loader = (timer = 2000) => {
+    setLoading(true);
+
+    setTimeout(() => {
+      setLoading(false);
+    }, timer);
+  };
+
   async function registerUser(data) {
     const cadastro = {
       email: data.email,
@@ -45,10 +53,11 @@ const AuthProvider = ({ children }) => {
 
         setUser(data);
       } catch (error) {
+        localStorage.clear();
         console.error(error);
       }
     }
-    setLoading(false);
+    loader(500);
   }
 
   useEffect(() => {
@@ -85,7 +94,15 @@ const AuthProvider = ({ children }) => {
 
   return (
     <AuthContext.Provider
-      value={{ user, loading, registerUser, submitLogin, logout }}
+      value={{
+        user,
+        loading,
+        setLoading,
+        loader,
+        registerUser,
+        submitLogin,
+        logout,
+      }}
     >
       {children}
     </AuthContext.Provider>

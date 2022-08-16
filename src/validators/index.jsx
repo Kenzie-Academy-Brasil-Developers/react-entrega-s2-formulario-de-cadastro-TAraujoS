@@ -27,3 +27,7 @@ export const newSchema = yup.object({
   title: yup.string().required("Nome Obrigatório"),
   status: yup.string().required("Status Obrigatório"),
 });
+
+export const editSchema = yup.object({
+  status: yup.string().required("Altere o status"),
+});

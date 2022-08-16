@@ -10,7 +10,7 @@ const Container = styled.div`
   height: 100vh;
   background-color: rgba(18, 18, 20, 0.5);
 
-  .modal__box {
+  .modal {
     width: 100%;
     max-width: 350px;
     position: relative;
@@ -27,7 +27,7 @@ const Container = styled.div`
     }
   }
 
-  .modal__box div {
+  .modal section {
     display: flex;
     justify-content: space-between;
     background-color: var(--color-grayinput);
@@ -35,20 +35,21 @@ const Container = styled.div`
     border-radius: 4px 4px 0px 0px;
   }
 
-  .modal__box div h3 {
+  .modal section h3 {
     color: var(--color-whitetext);
     font-style: normal;
     font-weight: 700;
     font-size: 14px;
     line-height: 24px;
   }
-  .modal__box div button {
+  .modal section button {
     background: none;
     border: none;
     color: var(--color-graydark);
+    font-size: 15px;
     cursor: pointer;
   }
-  .modal__box div button:hover {
+  .modal section button:hover {
     color: var(--color-whitetext);
   }
 `;
