@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { createContext, useState } from "react";
 import api from "../services/api";
 import { useAuth } from "./AuthContext";
+import { toast } from "react-toastify";
 
 export const TechsContext = createContext({});
 
@@ -13,9 +14,7 @@ const TechProvider = ({ children }) => {
 
   async function loadTechs() {
     try {
-      console.log(user);
       const response = await api.get(`users/${user.id}`);
-      console.log("TESTE ID:", user.id);
       setTechs(response.data.techs);
     } catch (error) {
       console.log(error);
@@ -23,34 +22,37 @@ const TechProvider = ({ children }) => {
   }
 
   useEffect(() => {
-    loadTechs();
+    if (user != null) {
+      loadTechs();
+    }
   }, [user]);
 
-  async function newTech(data) {
-    try {
-      const response = await api.post(`/users/techs/`, data);
-      setModal(null);
-    } catch (error) {
-      console.log(error);
-    }
+  function newTech(data) {
+    api
+      .post("/users/techs", data)
+      .then((res) => {
+        setTechs((oldList) => [res.data, ...oldList]);
+        toast.success("Tech criada com sucesso!");
+      })
+      .catch((error) => console.log(error));
   }
 
-  async function editTech(data) {
-    try {
-      const response = await api.put(`/users/techs/${tech.id}`, data);
-      setModal(null);
-    } catch (error) {
-      console.log(error);
-    }
+  function editTech(data) {
+    api
+      .put(`/users/techs/${techs.id}`, data)
+      .then((res) => console.log(res))
+      .catch((error) => console.log(error));
   }
 
-  async function deleteTech() {
-    try {
-      const response = await api.delete(`/users/techs/${tech.id}`);
-      setModal(null);
-    } catch (error) {
-      console.log(error);
-    }
+  function deleteTech(id) {
+    api
+      .delete(`/users/techs/${id}`)
+      .then((res) => {
+        const newTechList = techs.filter((tech) => tech.id !== id);
+        setTechs(newTechList);
+        toast.success("Tech deletada com sucesso!");
+      })
+      .catch((error) => console.log(error));
   }
 
   return (

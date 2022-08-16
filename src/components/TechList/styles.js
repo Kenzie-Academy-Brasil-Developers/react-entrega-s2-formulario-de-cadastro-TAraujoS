@@ -3,9 +3,9 @@ import styled from "styled-components";
 export const TechUl = styled.ul`
   display: flex;
   flex-direction: column;
-  height: 300px;
   width: 55%;
 
+  margin-bottom: 50px;
   padding: 1rem;
   gap: 1rem;
 
@@ -34,13 +34,6 @@ export const TechUl = styled.ul`
         color: var(--color-whitetext);
       }
     }
-  }
-
-  .btnDelete {
-    gap: 1rem;
-    width: 20%;
-    height: 20px;
-    margin: 0;
   }
 
   h3 {

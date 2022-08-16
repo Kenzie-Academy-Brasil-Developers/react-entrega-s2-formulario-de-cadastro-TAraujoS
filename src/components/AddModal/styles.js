@@ -14,12 +14,14 @@ const ModalForm = styled.form`
   input {
     width: 100%;
     height: 38px;
-    color: var(--color-whitetext);
-    background: var(--color-grayinput);
+
     border: 1px solid var(--color-grayinput);
     border-radius: 3px;
     margin-bottom: 1.3rem;
     padding-left: 0.8rem;
+
+    color: var(--color-whitetext);
+    background: var(--color-grayinput);
     transition: 0.2s;
   }
 
@@ -30,12 +32,14 @@ const ModalForm = styled.form`
   select {
     width: 100%;
     height: 2.4rem;
+
     margin-bottom: 1.3rem;
     padding-left: 0.8rem;
-    color: var(--color-graydark);
-    background: var(--color-grayinput);
     border: 1px solid var(--color-grayinput);
     border-radius: 4px;
+
+    color: var(--color-graydark);
+    background: var(--color-grayinput);
   }
 
   select:focus {
@@ -47,11 +51,13 @@ const ModalForm = styled.form`
     display: block;
     width: 100%;
     height: 2.4rem;
-    color: var(--color-whitetext);
-    background: var(--color-pink);
+
     border: 1px solid var(--color-pink);
     border-radius: 4px;
     margin-bottom: 1rem;
+
+    color: var(--color-whitetext);
+    background: var(--color-pink);
     transition: 0.2s;
     cursor: pointer;
   }

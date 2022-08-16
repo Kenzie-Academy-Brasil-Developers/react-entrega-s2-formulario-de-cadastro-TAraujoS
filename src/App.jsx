@@ -13,6 +13,7 @@ function App() {
         <RoutesMain />
         <ToastContainer />
       </TechProvider>
+      <ToastContainer />
     </AuthProvider>
   );
 }

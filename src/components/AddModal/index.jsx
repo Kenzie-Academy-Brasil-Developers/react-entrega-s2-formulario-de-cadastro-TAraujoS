@@ -16,10 +16,10 @@ const ModalAdd = () => {
 
   return (
     <>
-      <div>
+      <section>
         <h3>Cadastrar Tecnologia</h3>
         <button onClick={() => setModal(null)}> X </button>
-      </div>
+      </section>
       <ModalForm onSubmit={handleSubmit(newTech)}>
         <label htmlFor="status">Nome</label>
         <input

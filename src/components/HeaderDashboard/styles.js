@@ -1,12 +1,13 @@
 import styled from "styled-components";
 
 export const Header = styled.header`
-  width: 100%;
-  height: 100px;
-  padding: 0;
   display: flex;
   align-items: center;
   justify-content: center;
+
+  width: 100%;
+  height: 100px;
+  padding: 0;
   gap: 30%;
 
   img {
@@ -69,7 +70,7 @@ export const Container = styled.section`
 
   @media (max-width: 768px) {
     flex-direction: column;
-    padding-left: 25%;
+    padding-left: 20%;
     align-items: flex-start;
   }
 `;
