@@ -33,11 +33,17 @@ const AuthProvider = ({ children }) => {
       .post("/users", cadastro)
       .then((response) => {
         console.log(response);
-        toast.success("Cadastro realizado com sucesso!");
+        toast.success("Cadastro realizado com sucesso!", {
+          autoClose: 2000,
+          theme: "dark",
+        });
         navigate(`/`);
       })
       .catch((err) => {
-        toast.error("Ops! Algo deu errado");
+        toast.error("Ops! Algo deu errado", {
+          autoClose: 2000,
+          theme: "dark",
+        });
         console.log(err);
       });
   }
@@ -47,7 +53,7 @@ const AuthProvider = ({ children }) => {
 
     if (token) {
       try {
-        api.defaults.headers.authorization = `Bearer ${token}`;
+        api.defaults.headers.Authorization = `Bearer ${token}`;
 
         const { data } = await api.get("/profile");
 
@@ -78,9 +84,15 @@ const AuthProvider = ({ children }) => {
       const navigateTo = location.state?.from?.pathname || "/dashboard";
 
       navigate(navigateTo, { replace: true });
-      toast.success("Login efetuado com sucesso!");
+      toast.success("Login efetuado com sucesso!", {
+        autoClose: 2000,
+        theme: "dark",
+      });
     } catch (error) {
-      toast.error("Email ou senha inválidos");
+      toast.error("Email ou senha inválidos", {
+        autoClose: 2000,
+        theme: "dark",
+      });
       console.log(error);
     }
   }
@@ -89,7 +101,10 @@ const AuthProvider = ({ children }) => {
     setUser(null);
     localStorage.clear();
     navigate("/");
-    toast.success("Logout efetuado com sucesso!");
+    toast.success("Logout efetuado com sucesso!", {
+      autoClose: 2000,
+      theme: "dark",
+    });
   };
 
   return (
