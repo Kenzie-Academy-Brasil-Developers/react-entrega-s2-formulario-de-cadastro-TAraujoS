@@ -32,7 +32,10 @@ const TechProvider = ({ children }) => {
       .post("/users/techs", data)
       .then((res) => {
         setTechs((oldList) => [res.data, ...oldList]);
-        toast.success("Tech criada com sucesso!");
+        toast.success("Tech criada com sucesso!", {
+          autoClose: 2000,
+          theme: "dark",
+        });
         setModal(null);
       })
       .catch((error) => console.log(error));
@@ -51,7 +54,10 @@ const TechProvider = ({ children }) => {
       .then((res) => {
         const newTechList = techs.filter((tech) => tech.id !== id);
         setTechs(newTechList);
-        toast.success("Tech deletada com sucesso!");
+        toast.success("Tech deletada com sucesso!", {
+          autoClose: 2000,
+          theme: "dark",
+        });
         setModal(null);
       })
       .catch((error) => console.log(error));
