@@ -1,16 +1,61 @@
-import { createContext, useContext, useEffect, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import {
+  createContext,
+  ReactNode,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import api from "../services/api";
+import { ITech } from "./TechsContext";
 
-export const AuthContext = createContext({});
+export interface IAuthProviderProps {
+  children: ReactNode;
+}
 
-const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(true);
+export interface IUser {
+  id: string;
+  name: string;
+  email: string;
+  course_module: string;
+  bio: string;
+  contact: string;
+  techs: ITech[];
+}
+
+export interface IUserRegister {
+  email: string;
+  password: string;
+  confirmPassword: string;
+  name?: string;
+  bio?: string;
+  contact: string;
+  course_module: string;
+}
+
+export interface IUserLogin {
+  email: string;
+  password: string;
+}
+
+interface IAuthContext {
+  user: IUser | null;
+  //setUser:(user: IUser | null) => void;
+  loading: Boolean;
+  registerUser: (data: IUserRegister) => void;
+  submitLogin: (data: IUserLogin) => void;
+  logout: () => void;
+  loader: (timer?: number) => void;
+}
+
+export const AuthContext = createContext<IAuthContext>({} as IAuthContext);
+
+const AuthProvider = ({ children }: IAuthProviderProps) => {
+  const [user, setUser] = useState<IUser | null>(null);
+  const [loading, setLoading] = useState<Boolean>(true);
 
   const navigate = useNavigate();
-  const location = useLocation();
 
   const loader = (timer = 2000) => {
     setLoading(true);
@@ -20,7 +65,7 @@ const AuthProvider = ({ children }) => {
     }, timer);
   };
 
-  async function registerUser(data) {
+  async function registerUser(data: IUserRegister): Promise<void> {
     const cadastro = {
       email: data.email,
       password: data.password,
@@ -53,7 +98,7 @@ const AuthProvider = ({ children }) => {
 
     if (token) {
       try {
-        api.defaults.headers.Authorization = `Bearer ${token}`;
+        api.defaults.headers.common["Authorization"] = `Bearer ${token}`;
 
         const { data } = await api.get("/profile");
 
@@ -70,20 +115,18 @@ const AuthProvider = ({ children }) => {
     verifyUser();
   }, []);
 
-  async function submitLogin(data) {
+  async function submitLogin(data: IUserLogin): Promise<void> {
     try {
       const response = await api.post("/sessions", data);
 
       const { user: userResponse, token } = response.data;
 
-      api.defaults.headers.authorization = `Bearer ${token}`;
+      api.defaults.headers.common["Authorization"] = `Bearer ${token}`;
       setUser(userResponse);
 
       localStorage.setItem("@kenzie-hub:token", token);
 
-      const navigateTo = location.state?.from?.pathname || "/dashboard";
-
-      navigate(navigateTo, { replace: true });
+      navigate("/dashboard", { replace: true });
       toast.success("Login efetuado com sucesso!", {
         autoClose: 2000,
         theme: "dark",
@@ -97,7 +140,7 @@ const AuthProvider = ({ children }) => {
     }
   }
 
-  const logout = () => {
+  const logout = (): void => {
     setUser(null);
     localStorage.clear();
     navigate("/");
@@ -112,7 +155,6 @@ const AuthProvider = ({ children }) => {
       value={{
         user,
         loading,
-        setLoading,
         loader,
         registerUser,
         submitLogin,

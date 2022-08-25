@@ -29,6 +29,9 @@ const ModalForm = styled.form`
     border: 1px solid var(--color-whitetext);
   }
 
+  span {
+  }
+
   select {
     width: 100%;
     height: 2.4rem;

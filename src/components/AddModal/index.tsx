@@ -1,9 +1,15 @@
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useContext } from "react";
-import { TechsContext } from "../../contexts/TechsContext";
 import { newSchema } from "../../validators";
 import ModalForm from "./styles";
+
+import { TechsContext } from "../../contexts/TechsContext";
+
+type FormData = {
+  title: string;
+  status: string;
+};
 
 const ModalAdd = () => {
   const { setModal, newTech } = useContext(TechsContext);
@@ -12,24 +18,19 @@ const ModalAdd = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({ resolver: yupResolver(newSchema) });
+  } = useForm<FormData>({ resolver: yupResolver(newSchema) });
 
+  const onSubmit = handleSubmit(newTech);
   return (
     <>
       <section>
         <h3>Cadastrar Tecnologia</h3>
         <button onClick={() => setModal(null)}> X </button>
       </section>
-      <ModalForm onSubmit={handleSubmit(newTech)}>
-        <label htmlFor="status">Nome</label>
-        <input
-          id="title"
-          label="Nome"
-          {...register("title")}
-          error={errors?.title}
-          placeholder="Tecnologia"
-        />
-
+      <ModalForm onSubmit={onSubmit}>
+        <label htmlFor="title">Nome</label>
+        <input id="title" {...register("title")} placeholder="Tecnologia" />
+        <span>{errors?.title?.message}</span>
         <label htmlFor="status">Selecionar status</label>
         <select id="status" {...register("status")}>
           <option value="Iniciante">Iniciante</option>

@@ -8,7 +8,7 @@ import { Form, HeaderForm } from "./styles";
 import { toast } from "react-toastify";
 import { LinkStyled as Link } from "./styles";
 import { registerSchema } from "../../validators";
-import { useAuth } from "../../contexts/AuthContext";
+import { IUserRegister, useAuth } from "../../contexts/AuthContext";
 
 function FormRegister() {
   const { registerUser } = useAuth();
@@ -17,10 +17,11 @@ function FormRegister() {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({ resolver: yupResolver(registerSchema) });
+  } = useForm<IUserRegister>({ resolver: yupResolver(registerSchema) });
 
   const onError = () => toast.error("Preencha todos os campos!");
 
+  const onSubmit = handleSubmit(registerUser, onError);
   return (
     <Section>
       <HeaderForm>
@@ -28,7 +29,7 @@ function FormRegister() {
         <Link to="/">Voltar</Link>
       </HeaderForm>
 
-      <Form onSubmit={handleSubmit(registerUser, onError)}>
+      <Form onSubmit={onSubmit}>
         <h2>Crie sua conta</h2>
         <h4>Rapido e grátis, vamos nessa</h4>
         <Input
@@ -40,6 +41,7 @@ function FormRegister() {
           error={errors?.name}
         />
         <Input
+          type="text"
           id="email"
           label="Email"
           placeholder="Digite aqui o seu email"
@@ -79,7 +81,7 @@ function FormRegister() {
           error={errors?.contact}
         />
         <label htmlFor="module">Selecionar Módulo </label>
-        <select name="module" id="module" {...register("course_module")}>
+        <select id="module" {...register("course_module")}>
           <option value="Primeiro módulo (Introdução ao Frontend)">
             Primeiro módulo (Introdução ao Frontend)
           </option>
