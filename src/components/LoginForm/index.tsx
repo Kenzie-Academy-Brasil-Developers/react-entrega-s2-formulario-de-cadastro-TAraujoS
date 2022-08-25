@@ -4,11 +4,10 @@ import "./styles";
 import { Form, Section } from "./styles";
 import logo from "../../assets/Logo.svg";
 import { toast } from "react-toastify";
-import React from "react";
 import { LinkStyled as Link } from "./styles";
 import Input from "../Input";
 import { loginSchema } from "../../validators";
-import { useAuth } from "../../contexts/AuthContext";
+import { IUserLogin, useAuth } from "../../contexts/AuthContext";
 
 function LoginForm() {
   const { submitLogin } = useAuth();
@@ -17,31 +16,33 @@ function LoginForm() {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({
+  } = useForm<IUserLogin>({
     resolver: yupResolver(loginSchema),
   });
 
   const onError = () => toast.error("Preencha todos os campos!");
 
+  const onSubmit = handleSubmit(submitLogin, onError);
   return (
     <Section>
       <img src={logo} alt="Logo KenzieHub" />
-      <Form action="" onSubmit={handleSubmit(submitLogin, onError)}>
+      <Form action="" onSubmit={onSubmit}>
         <h2>Login</h2>
         <Input
           id="email"
           label="Email"
+          type="text"
+          error={errors?.email}
           placeholder="Digite aqui o seu email"
           {...register("email")}
-          error={errors?.email}
         />
         <Input
           type="password"
           id="password"
           label="Senha"
+          error={errors?.password}
           placeholder="Digite aqui o sua senha"
           {...register("password")}
-          error={errors?.password}
         />
         <button className="submit" type="submit">
           Entrar

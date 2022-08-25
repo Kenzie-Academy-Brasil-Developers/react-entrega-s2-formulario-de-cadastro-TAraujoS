@@ -6,10 +6,12 @@ import { editSchema } from "../../validators";
 import EditForm from "./styles";
 
 const ModalEdit = () => {
-  const { setModal, tech, editTech, deleteTech } = useContext(TechsContext);
+  const { setModal, tech, deleteTech } = useContext(TechsContext);
   const { register, handleSubmit } = useForm({
     resolver: yupResolver(editSchema),
   });
+
+  const editTech = () => {};
 
   return (
     <>
