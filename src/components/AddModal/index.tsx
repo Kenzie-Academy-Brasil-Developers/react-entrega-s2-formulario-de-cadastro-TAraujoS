@@ -5,6 +5,8 @@ import { newSchema } from "../../validators";
 import ModalForm from "./styles";
 
 import { TechsContext } from "../../contexts/TechsContext";
+import { toast } from "react-toastify";
+import { BiErrorCircle } from "react-icons/bi";
 
 type FormData = {
   title: string;
@@ -20,7 +22,8 @@ const ModalAdd = () => {
     formState: { errors },
   } = useForm<FormData>({ resolver: yupResolver(newSchema) });
 
-  const onSubmit = handleSubmit(newTech);
+  const onError = () => toast.error("Nome Obrigatório!");
+  const onSubmit = handleSubmit(newTech, onError);
   return (
     <>
       <section>
@@ -29,8 +32,10 @@ const ModalAdd = () => {
       </section>
       <ModalForm onSubmit={onSubmit}>
         <label htmlFor="title">Nome</label>
-        <input id="title" {...register("title")} placeholder="Tecnologia" />
-        <span>{errors?.title?.message}</span>
+        <div>
+          <input id="title" {...register("title")} placeholder="Tecnologia" />
+          <span>{errors?.title && <BiErrorCircle />}</span>
+        </div>
         <label htmlFor="status">Selecionar status</label>
         <select id="status" {...register("status")}>
           <option value="Iniciante">Iniciante</option>

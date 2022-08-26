@@ -18,7 +18,7 @@ export interface ITechContext {
   loadTechs: (user: IUser) => void;
   newTech: (data: INewTech) => void;
   deleteTech: (id: string) => void;
-  //editTech: (data: IEditTech) => void;
+  editTech: (data: IEditTech) => void;
 }
 
 export interface ITech {
@@ -34,9 +34,9 @@ export interface INewTech {
   status: string;
 }
 
-// export interface IEditTech {
-//   status: string;
-// }
+export interface IEditTech {
+  status: string;
+}
 
 export interface IDeleteTech {
   id: string;
@@ -80,18 +80,19 @@ const TechProvider = ({ children }: ITechProviderProps) => {
       .catch((error) => console.log(error));
   }
 
-  // function editTech(data: IEditTech) {
-  //   api
-  //     .put(`/users/techs/${id}`, data)
-  //     .then((res) => {
-  //       toast.success("Tech salva com sucesso!", {
-  //         autoClose: 2000,
-  //         theme: "dark",
-  //       });
-  //       setModal(null);
-  //     })
-  //     .catch((error) => console.log(error));
-  // }
+  function editTech(status: IEditTech) {
+    api
+      .put(`/users/techs/${tech?.id}`, status)
+      .then((res) => {
+        loadTechs(user!);
+        toast.success("Alteração salva com sucesso!", {
+          autoClose: 2000,
+          theme: "dark",
+        });
+        setModal(null);
+      })
+      .catch((error) => console.log(error));
+  }
 
   function deleteTech(id: string) {
     api
@@ -119,7 +120,7 @@ const TechProvider = ({ children }: ITechProviderProps) => {
         setModal,
         newTech,
         loadTechs,
-        //editTech,
+        editTech,
         deleteTech,
       }}
     >

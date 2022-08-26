@@ -11,25 +11,37 @@ const ModalForm = styled.form`
     margin-bottom: 0.495rem;
   }
 
-  input {
-    width: 100%;
-    height: 38px;
-
-    border: 1px solid var(--color-grayinput);
-    border-radius: 3px;
+  div {
+    display: flex;
+    align-items: center;
+    padding: 2px;
     margin-bottom: 1.3rem;
-    padding-left: 0.8rem;
 
-    color: var(--color-whitetext);
-    background: var(--color-grayinput);
-    transition: 0.2s;
-  }
+    background-color: var(--color-grayinput);
+    border: 1px solid var(--color-grayinput);
+    border-radius: 4px;
 
-  input:focus {
-    border: 1px solid var(--color-whitetext);
-  }
+    &:hover {
+      border: 1px solid var(--color-whitetext);
+    }
 
-  span {
+    input {
+      height: 2rem;
+      width: 100%;
+      padding-left: 0.8rem;
+
+      color: var(--color-whitetext);
+      background-color: var(--color-grayinput);
+      border: none;
+      border-radius: 4px;
+    }
+
+    svg {
+      display: flex;
+      align-items: center;
+      margin-right: 10px;
+      color: #f10;
+    }
   }
 
   select {

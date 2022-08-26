@@ -1,17 +1,16 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useContext } from "react";
 import { useForm } from "react-hook-form";
-import { TechsContext } from "../../contexts/TechsContext";
+import { IEditTech, TechsContext } from "../../contexts/TechsContext";
 import { editSchema } from "../../validators";
 import EditForm from "./styles";
 
 const ModalEdit = () => {
-  const { setModal, tech, deleteTech } = useContext(TechsContext);
-  const { register, handleSubmit } = useForm({
+  const { setModal, tech, deleteTech, editTech } = useContext(TechsContext);
+
+  const { register, handleSubmit } = useForm<IEditTech>({
     resolver: yupResolver(editSchema),
   });
-
-  const editTech = () => {};
 
   return (
     <>
@@ -25,7 +24,7 @@ const ModalEdit = () => {
           id="title"
           placeholder={tech?.title}
           defaultValue={tech?.title}
-          type="text"
+          disabled
         />
 
         <label htmlFor="status">Status</label>
